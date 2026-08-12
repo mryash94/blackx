@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BLACK X — Premium Prepaid Card Marketplace
 
 A premium, dark-futuristic storefront for prepaid card products (Visa, Mastercard, RuPay)
@@ -84,3 +85,6 @@ creation and never regenerated.
 ## Support
 
 blackxccshop@gmail.com
+=======
+# blackx
+>>>>>>> origin/main
