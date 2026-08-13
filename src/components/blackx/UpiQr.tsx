@@ -4,7 +4,7 @@ import { memo } from "react";
 export const UpiQr = memo(function UpiQr({ value }: { value: string }) {
   return (
     <img
-      src="/qr-payment.png"
+      src="/payment/payment-qr.png"
       alt="UPI payment QR code"
       className="h-full w-full"
       width={512}
@@ -12,3 +12,4 @@ export const UpiQr = memo(function UpiQr({ value }: { value: string }) {
     />
   );
 });
+
