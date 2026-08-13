@@ -222,10 +222,10 @@ function Marketplace() {
           </p>
           <p className="mt-3 text-[10px] tracking-[0.16em] text-muted-foreground">SUPPORT</p>
           <a
-            href="mailto:blackxccxshop@gmail.com"
+            href="mailto:blackccshopx@gmail.com"
             className="text-sm font-medium text-primary break-all"
           >
-            blackxccxshop@gmail.com
+            blackccshopx@gmail.com
           </a>
         </footer>
       </main>
@@ -250,3 +250,4 @@ function Marketplace() {
     </div>
   );
 }
+
