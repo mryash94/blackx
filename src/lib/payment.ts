@@ -8,7 +8,7 @@ export const TEST_PAYMENT_ENVIRONMENT = false;
 
 /** Owner-configured UPI destination (override with VITE_UPI_ID). */
 export const UPI_ID: string =
-  (import.meta.env["VITE_UPI_ID"] as string | undefined)?.trim() || "ayushprimeloot@fam";
+  (import.meta.env["VITE_UPI_ID"] as string | undefined)?.trim() || "9507694240@ybl";
 
 export const UPI_PAYEE_NAME: string =
   (import.meta.env["VITE_UPI_PAYEE_NAME"] as string | undefined)?.trim() || "BLACK X";
