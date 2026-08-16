@@ -1,7 +1,16 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
-import { Check, Copy, ShieldCheck, X } from "lucide-react";
+import { Check, Copy, Smartphone, ShieldCheck, X } from "lucide-react";
 import { getProductById, inr, STATUS_STEP, type Order, type Product } from "@/lib/marketplace";
-import { UPI_ID, formatAmount, paymentDetailsText, qrPayload } from "@/lib/payment";
+import {
+  UPI_ID,
+  buildAndroidIntentUrl,
+  buildUpiIntent,
+  formatAmount,
+  GOOGLE_PAY_PACKAGE,
+  isAndroid,
+  paymentDetailsText,
+  qrPayload,
+} from "@/lib/payment";
 import { showPaymentMessage } from "./PaymentMessages";
 import { useCountdown } from "@/hooks/useCountdown";
 import { UpiQr } from "./UpiQr";
@@ -65,8 +74,10 @@ export function CheckoutModal({
 
   const launchInProgress = useRef(false);
   const launchTimers = useRef<number[]>([]);
+  const returnHandled = useRef(false);
   const copyTimer = useRef<number | null>(null);
   const submitting = useRef(false);
+  const referenceInputRef = useRef<HTMLInputElement | null>(null);
   const refId = useId();
   const timer = useCountdown(15 * 60, order.id);
 
@@ -78,6 +89,52 @@ export function CheckoutModal({
     launchTimers.current = [];
     launchInProgress.current = false;
   }, []);
+
+  /**
+   * Opens the user's UPI app with this order's exact amount already filled in. If the
+   * tab is still visible shortly after, no app opened — surface the QR fallback. If the
+   * user comes back to this tab, treat that as "returned from paying" and prompt for the
+   * transaction reference automatically.
+   */
+  const launchUpiApp = useCallback(() => {
+    if (launchInProgress.current || paymentStatus === "submitted" || timer.expired) return;
+    launchInProgress.current = true;
+    returnHandled.current = false;
+
+    const link = isAndroid()
+      ? buildAndroidIntentUrl(amount, order.id, GOOGLE_PAY_PACKAGE)
+      : buildUpiIntent(amount, order.id);
+    window.location.href = link;
+
+    launchTimers.current.push(
+      window.setTimeout(() => {
+        if (document.visibilityState === "visible") {
+          clearLaunchTimers();
+          showPaymentMessage(
+            "Couldn't open a UPI app automatically. Use Scan & Pay (QR) below instead.",
+            "warning",
+          );
+        }
+      }, 1500),
+    );
+  }, [amount, order.id, paymentStatus, timer.expired, clearLaunchTimers]);
+
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (
+        document.visibilityState === "visible" &&
+        launchInProgress.current &&
+        !returnHandled.current
+      ) {
+        returnHandled.current = true;
+        clearLaunchTimers();
+        showPaymentMessage("Welcome back! Enter your transaction reference to continue.", "info");
+        referenceInputRef.current?.focus();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, [clearLaunchTimers]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -265,6 +322,19 @@ export function CheckoutModal({
                   Scan with any UPI app. The QR carries this order&rsquo;s exact amount and payee.
                 </p>
 
+                <button
+                  onClick={launchUpiApp}
+                  disabled={paymentStatus === "submitting" || timer.expired}
+                  className="bx-cta mt-3 flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+                >
+                  <Smartphone className="h-4 w-4" />
+                  PAY &amp; AUTO-REDIRECT
+                </button>
+                <p className="mt-1.5 text-[10px] leading-relaxed text-muted-foreground">
+                  Opens your UPI app with the amount filled in. Come back to this tab afterwards
+                  to submit your reference automatically.
+                </p>
+
                 <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
                   <div className="min-w-0 text-left">
                     <p className="text-[10px] tracking-[0.16em] text-muted-foreground">
@@ -291,6 +361,7 @@ export function CheckoutModal({
               </label>
               <input
                 id={refId}
+                ref={referenceInputRef}
                 value={transactionReference}
                 onChange={(e) => {
                   patch({ transactionReference: e.target.value });

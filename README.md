@@ -84,7 +84,7 @@ creation and never regenerated.
 
 ## Support
 
-blackxccshop@gmail.com
+blackxccxshop@gmail.com
 =======
 # blackx
 >>>>>>> origin/main
