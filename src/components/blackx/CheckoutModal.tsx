@@ -63,8 +63,6 @@ export function CheckoutModal({
   const [message, setMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const launchInProgress = useRef(false);
-  const launchTimers = useRef<number[]>([]);
   const copyTimer = useRef<number | null>(null);
   const submitting = useRef(false);
   const refId = useId();
@@ -72,12 +70,6 @@ export function CheckoutModal({
 
   const amount = checkout.selectedPrice;
   const { paymentStatus, transactionReference } = checkout;
-
-  const clearLaunchTimers = useCallback(() => {
-    for (const t of launchTimers.current) window.clearTimeout(t);
-    launchTimers.current = [];
-    launchInProgress.current = false;
-  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -92,10 +84,9 @@ export function CheckoutModal({
   // Every timer/listener dies with the modal.
   useEffect(
     () => () => {
-      clearLaunchTimers();
       if (copyTimer.current) window.clearTimeout(copyTimer.current);
     },
-    [clearLaunchTimers],
+    [],
   );
 
   const copyAmount = useCallback(async () => {
@@ -113,12 +104,11 @@ export function CheckoutModal({
 
   useEffect(() => {
     if (timer.expired) {
-      clearLaunchTimers();
       setCheckout((prev) =>
         prev.paymentStatus === "submitted" ? prev : { ...prev, paymentStatus: "payment_expired" },
       );
     }
-  }, [timer.expired, clearLaunchTimers]);
+  }, [timer.expired]);
 
   async function submit() {
     if (submitting.current || paymentStatus === "submitted") return;
