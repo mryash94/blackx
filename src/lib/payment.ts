@@ -31,26 +31,9 @@ function upiParams(amount: number, orderId: string): string {
 }
 
 /** Builds the UPI deep link from the configured destination and the selected price. */
-export function buildUpiIntent(amount: number, orderId: string): string {
+function buildUpiIntent(amount: number, orderId: string): string {
   return `upi://pay?${upiParams(amount, orderId)}`;
 }
-
-/**
- * Android Chrome often ignores the bare `upi://` scheme; the `intent://` form is the
- * documented way to hand the same payload to any installed UPI app (Google Pay included).
- */
-export function buildAndroidIntentUrl(amount: number, orderId: string, pkg?: string): string {
-  const target = pkg ? `package=${pkg};` : "";
-  return `intent://pay?${upiParams(amount, orderId)}#Intent;scheme=upi;action=android.intent.action.VIEW;${target}S.browser_fallback_url=;end`;
-}
-
-export const GOOGLE_PAY_PACKAGE = "com.google.android.apps.nbu.paisa.user";
-
-export const isAndroid = () =>
-  typeof navigator !== "undefined" && /android/i.test(navigator.userAgent);
-
-export const isMobile = () =>
-  typeof navigator !== "undefined" && /android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
 /** Payload encoded in the QR — identical to the UPI deep link, same amount. */
 export function qrPayload(order: Pick<Order, "id" | "amount">): string {
