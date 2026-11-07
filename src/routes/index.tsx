@@ -28,13 +28,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BLACK X — Premium Prepaid Card Marketplace" },
+      { title: "RUSSIAN MARKET — Premium Prepaid Cards" },
       {
         name: "description",
         content:
-          "BLACK X is a premium prepaid card storefront: browse Visa, Mastercard and RuPay prepaid products with transparent pricing, instant delivery and verified order tracking.",
+          "RUSSIAN MARKET is a premium prepaid card storefront: browse Visa, Mastercard and RuPay prepaid products with transparent pricing, instant delivery and verified order tracking.",
       },
-      { property: "og:title", content: "BLACK X — Premium Prepaid Card Marketplace" },
+      { property: "og:title", content: "RUSSIAN MARKET — Premium Prepaid Cards" },
       {
         property: "og:description",
         content:
@@ -149,7 +149,7 @@ function Marketplace() {
           </span>
           <h1 className="mt-6 text-4xl leading-[1.08] font-bold tracking-tight sm:text-6xl">
             <span className="block text-2xl font-light tracking-[0.18em] text-muted-foreground sm:text-3xl">
-              BLACK <span className="text-primary">X</span>
+              RUSSIAN <span className="text-primary">MARKET</span>
             </span>
             Premium Prepaid Cards
           </h1>
@@ -250,4 +250,3 @@ function Marketplace() {
     </div>
   );
 }
-

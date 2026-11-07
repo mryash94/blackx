@@ -41,29 +41,29 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.14 0.02 275);
-  --foreground: oklch(0.98 0.005 275);
-  --card: oklch(0.18 0.025 275);
-  --card-foreground: oklch(0.98 0.005 275);
-  --popover: oklch(0.17 0.025 275);
-  --popover-foreground: oklch(0.98 0.005 275);
-  --primary: oklch(0.62 0.24 297);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.24 0.03 275);
-  --secondary-foreground: oklch(0.96 0.005 275);
-  --muted: oklch(0.24 0.03 275);
-  --muted-foreground: oklch(0.68 0.02 275);
-  --accent: oklch(0.28 0.05 285);
-  --accent-foreground: oklch(0.98 0.005 275);
+  --background: #020707;
+  --foreground: #f0fffd;
+  --card: #041b1b;
+  --card-foreground: #f0fffd;
+  --popover: #072322;
+  --popover-foreground: #f0fffd;
+  --primary: #14b8a6;
+  --primary-foreground: #001514;
+  --secondary: #0b2523;
+  --secondary-foreground: #e6fffb;
+  --muted: #102a28;
+  --muted-foreground: #9ab8b3;
+  --accent: #103633;
+  --accent-foreground: #f0fffd;
   --destructive: oklch(0.62 0.22 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.62 0.24 297);
-  --glass: oklch(0.22 0.03 278 / 55%);
-  --hairline: oklch(1 0 0 / 8%);
-  --neon: oklch(0.62 0.24 297);
-  --cyan: oklch(0.78 0.13 205);
+  --border: rgb(20 184 166 / 14%);
+  --input: rgb(20 184 166 / 18%);
+  --ring: #14b8a6;
+  --glass: rgb(7 35 34 / 70%);
+  --hairline: rgb(45 212 191 / 12%);
+  --neon: #14b8a6;
+  --cyan: #5eead4;
 }
 
 @layer base {
@@ -82,17 +82,17 @@
   }
 }
 
-/* Atmospheric background: deep navy base + purple/cyan glow + faint grid */
+/* Atmospheric background: near-black base + subtle teal glow + faint grid */
 @utility bx-backdrop {
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(60rem 40rem at 50% -10%, oklch(0.45 0.2 297 / 0.35), transparent 70%),
-    radial-gradient(40rem 30rem at 0% 40%, oklch(0.45 0.12 205 / 0.16), transparent 70%),
-    radial-gradient(45rem 35rem at 100% 85%, oklch(0.42 0.16 300 / 0.16), transparent 70%),
-    linear-gradient(180deg, oklch(0.13 0.02 275), oklch(0.11 0.02 265));
+    radial-gradient(60rem 40rem at 50% -10%, rgb(13 148 136 / 18%), transparent 70%),
+    radial-gradient(40rem 30rem at 0% 40%, rgb(20 184 166 / 8%), transparent 70%),
+    radial-gradient(45rem 35rem at 100% 85%, rgb(15 118 110 / 10%), transparent 70%),
+    linear-gradient(180deg, #020a09, #010404);
 }
 
 @utility bx-grid {
@@ -109,26 +109,26 @@
 }
 
 @utility bx-glass {
-  background: linear-gradient(180deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.02));
+  background: linear-gradient(180deg, rgb(20 184 166 / 7%), rgb(7 35 34 / 38%));
   border: 1px solid var(--hairline);
   backdrop-filter: blur(14px);
 }
 
 @utility bx-panel {
-  background: linear-gradient(180deg, oklch(0.2 0.03 278 / 0.75), oklch(0.16 0.025 270 / 0.7));
-  border: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgb(7 35 34 / 94%), rgb(4 27 27 / 94%));
+  border: 1px solid rgb(45 212 191 / 14%);
   backdrop-filter: blur(16px);
 }
 
 @utility bx-glow {
   box-shadow:
-    0 0 0 1px oklch(0.62 0.24 297 / 0.45),
-    0 12px 48px -12px oklch(0.62 0.24 297 / 0.5);
+    0 0 0 1px rgb(20 184 166 / 35%),
+    0 12px 48px -12px rgb(20 184 166 / 35%);
 }
 
 @utility bx-cta {
-  background: linear-gradient(100deg, oklch(0.62 0.24 297), oklch(0.68 0.25 320));
-  box-shadow: 0 10px 30px -12px oklch(0.62 0.24 297 / 0.8);
+  background: linear-gradient(100deg, #0d9488, #14b8a6);
+  box-shadow: 0 10px 30px -12px rgb(20 184 166 / 65%);
 }
 
 @utility bx-tabular {
@@ -153,9 +153,9 @@
 /* Purchase activity toast */
 @utility bx-activity {
   box-shadow:
-    0 0 0 1px oklch(0.62 0.24 297 / 0.5),
-    0 18px 46px -18px oklch(0.62 0.24 297 / 0.75);
-  border: 1px solid oklch(0.62 0.24 297 / 0.5);
+    0 0 0 1px rgb(20 184 166 / 40%),
+    0 18px 46px -18px rgb(20 184 166 / 55%);
+  border: 1px solid rgb(20 184 166 / 40%);
   will-change: transform, opacity;
 }
 @keyframes bx-activity-in {
@@ -208,7 +208,7 @@
 }
 
 @utility bx-amount {
-  background: linear-gradient(100deg, oklch(0.8 0.17 300), oklch(0.78 0.15 240));
+  background: linear-gradient(100deg, #5eead4, #14b8a6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

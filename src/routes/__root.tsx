@@ -77,8 +77,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "BLACK X — Premium Prepaid Cards" },
-      { name: "description", content: "Premium prepaid card storefront." },
+      { title: "RUSSIAN MARKET — Premium Prepaid Cards" },
+      { name: "description", content: "The Most Trusted Premium Card Platform." },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

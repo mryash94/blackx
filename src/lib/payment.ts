@@ -8,10 +8,10 @@ export const TEST_PAYMENT_ENVIRONMENT = false;
 
 /** Owner-configured UPI destination (override with VITE_UPI_ID). */
 export const UPI_ID: string =
-  (import.meta.env["VITE_UPI_ID"] as string | undefined)?.trim() || "ayushprimeloot@fam";
+  (import.meta.env["VITE_UPI_ID"] as string | undefined)?.trim() || "blackxayush@fam";
 
 export const UPI_PAYEE_NAME: string =
-  (import.meta.env["VITE_UPI_PAYEE_NAME"] as string | undefined)?.trim() || "BLACK X";
+  (import.meta.env["VITE_UPI_PAYEE_NAME"] as string | undefined)?.trim() || "Russian Market";
 
 export const isUpiConfigured = () => UPI_ID.length > 0;
 
@@ -27,7 +27,10 @@ function upiParams(amount: number, orderId: string): string {
     am: formatAmount(amount),
     cu: "INR",
     tn: orderId,
-  }).toString();
+  })
+    .toString()
+    .replace(/\+/g, "%20")
+    .replace("%40", "@");
 }
 
 /** Builds the UPI deep link from the configured destination and the selected price. */
@@ -66,4 +69,3 @@ export function paymentDetailsText(order: Pick<Order, "id" | "amount">): string 
 
 /** Single source of truth for the amount charged for a product. */
 export const priceOf = (p: Product) => p.price;
-

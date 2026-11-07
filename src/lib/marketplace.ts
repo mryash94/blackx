@@ -169,7 +169,7 @@ export const STATUS_TONE: Record<OrderStatus, string> = {
   pending_payment: "text-amber-300 border-amber-300/30 bg-amber-300/10",
   payment_submitted: "text-cyan-300 border-cyan-300/30 bg-cyan-300/10",
   payment_verified: "text-emerald-300 border-emerald-300/30 bg-emerald-300/10",
-  processing: "text-violet-300 border-violet-300/30 bg-violet-300/10",
+  processing: "text-teal-300 border-teal-300/30 bg-teal-300/10",
   delivered: "text-emerald-200 border-emerald-200/30 bg-emerald-200/10",
   cancelled: "text-rose-300 border-rose-300/30 bg-rose-300/10",
 };

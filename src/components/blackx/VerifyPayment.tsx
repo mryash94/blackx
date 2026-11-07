@@ -14,7 +14,7 @@ export function VerifyPayment({ step }: { step: number }) {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(24rem 12rem at 15% 0%, oklch(0.62 0.24 297 / 0.14), transparent 70%)",
+              "radial-gradient(24rem 12rem at 15% 0%, rgb(20 184 166 / 12%), transparent 70%)",
           }}
         />
         <div className="relative">
@@ -39,7 +39,7 @@ export function VerifyPayment({ step }: { step: number }) {
                   key={s.n}
                   className={`grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-xl border px-3 py-2.5 transition-colors duration-200 ${
                     active
-                      ? "border-primary/45 bg-primary/8 shadow-[0_0_24px_-14px_oklch(0.62_0.24_297)]"
+                      ? "border-primary/45 bg-primary/8 shadow-[0_0_24px_-14px_rgba(20,184,166,0.65)]"
                       : done
                         ? "border-emerald-300/25 bg-emerald-300/5"
                         : "border-white/8 bg-white/3"

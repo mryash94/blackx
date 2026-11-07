@@ -164,7 +164,7 @@ export function CheckoutModal({
         className="bx-panel animate-in slide-in-from-bottom-4 fade-in max-h-[92dvh] w-full overflow-x-hidden overflow-y-auto rounded-t-3xl duration-300 sm:max-w-md sm:rounded-3xl"
         style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
       >
-        <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-white/8 bg-[oklch(0.17_0.025_275/0.92)] px-4 py-3 backdrop-blur">
+        <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-primary/15 bg-[#041b1b]/95 px-4 py-3 backdrop-blur">
           <span className="rounded-full border border-primary/40 bg-primary/15 px-2.5 py-1 text-[10px] font-bold tracking-widest text-primary">
             STEP {step}/4
           </span>
@@ -249,7 +249,7 @@ export function CheckoutModal({
                   PAY {inr(amount)}
                 </p>
 
-                <div className="mx-auto mt-4 w-full max-w-[15rem] rounded-2xl bg-white p-3 shadow-[0_18px_60px_-24px_oklch(0.62_0.24_297/0.8)]">
+                <div className="mx-auto mt-4 w-full max-w-[15rem] rounded-2xl bg-white p-3 shadow-[0_18px_60px_-24px_rgba(20,184,166,0.55)]">
                   <div className="aspect-square w-full">
                     {timer.expired ? (
                       <div className="grid h-full w-full place-items-center px-3 text-center text-[11px] font-semibold text-black">
@@ -265,13 +265,14 @@ export function CheckoutModal({
                   Scan with any UPI app. The QR carries this order&rsquo;s exact amount and payee.
                 </p>
 
-                <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5">
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2.5">
                   <div className="min-w-0 text-left">
                     <p className="text-[10px] tracking-[0.16em] text-muted-foreground">
                       PAYMENT AMOUNT
                     </p>
                     <p className="bx-tabular text-lg font-bold">₹{formatAmount(amount)}</p>
-                    <p className="bx-tabular truncate text-[11px] text-muted-foreground">{UPI_ID}</p>
+                    <p className="text-[10px] tracking-[0.12em] text-muted-foreground">UPI ID</p>
+                    <p className="bx-tabular truncate text-xs font-semibold text-primary">{UPI_ID}</p>
                   </div>
                   <button
                     onClick={copyAmount}
