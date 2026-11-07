@@ -3,12 +3,12 @@ import { Cpu } from "lucide-react";
 export function Header({ onOpenOrders }: { onOpenOrders: () => void }) {
   return (
     <header
-      className="fixed inset-x-0 top-0 z-40 border-b border-white/8 bg-[oklch(0.12_0.02_275/0.78)] backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-40 border-b border-primary/15 bg-[#020a09]/85 backdrop-blur-xl"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-3 py-2.5 sm:px-5">
-        <a href="/" className="min-w-0 truncate text-lg font-black tracking-tight sm:text-xl">
-          BLACK <span className="text-primary">X</span>
+        <a href="/" className="min-w-0 truncate text-sm font-black tracking-[0.04em] sm:text-xl">
+          RUSSIAN <span className="text-primary">MARKET</span>
         </a>
 
         <button
